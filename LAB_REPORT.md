@@ -29,6 +29,10 @@ Table 1. SonarQube issues in the starter code
 | 7 | java:S106 | ParcelService.java:[Ln 69, Col 17] | Replace this use of System.out by a logger. |
 | 8 | java:S2095 | ParcelService.java:[Ln 76, Col 33] | Use try-with-resources or close this "FileWriter" in a "finally" clause. |
 | 9 | java:S108 | ParcelService.java:[Ln 80, Col 33] | Remove this block of code, fill it in, or add a comment explaining why it is empty. |
+| 10 | java:S106 | Main.java:[Ln 9, Col 9] | Replace this use of System.out by a logger. |
+| 11 | java:S106 | Main.java:[Ln 15, Col 17] | Replace this use of System.out by a logger. |
+| 12 | java:S106 | Main.java:[Ln 17, Col 17] | Replace this use of System.out by a logger. |
+| 13 | java:S106 | Main.java:[Ln 22, Col 17] | Replace this use of System.out by a logger. |
 
 ## Task 2. AI review of the starter code
 
@@ -73,6 +77,10 @@ Table 2. All findings on the starter code
 | 27 | ParcelService.java:30 | The SMS message in `storeParcel` is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 30 prints the SMS text directly. Low severity for a command-line program, but it mixes output into the service class. |
 | 28 | ParcelService.java:67 | The staff listing in `printParcels` is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 67 prints the code, student ID and status directly. Same low severity as row 27. |
 | 29 | ParcelService.java:69 | The "is waiting" listing in `printParcels` is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 69 prints the waiting message directly. Same low severity as row 27. |
+| 30 | Main.java:9 | The list of commands is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 9 prints the "Commands: ..." help text directly. Low severity, because the help text is part of a command-line program's interface. |
+| 31 | Main.java:15 | The result of `store` ("Locker N" or "No free locker") is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 15 prints the result of the store command. Same low severity as row 30. |
+| 32 | Main.java:17 | The fee of `pickup` is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 17 prints the fee returned by `pickUp`. Same low severity as row 30. |
+| 33 | Main.java:22 | The number of free lockers is printed with `System.out.println` instead of a logger | SonarQube | java:S106 | Yes. Line 22 prints the free-locker count after `staff`. Same low severity as row 30. |
 
 2.1 Name two problems that only the AI review found.
 
