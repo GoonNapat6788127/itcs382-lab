@@ -102,21 +102,47 @@ Table 3. What you did with each SonarQube issue in Table 1
 
 | No. in Table 1 | Fixed or kept | Commit, or the reason for keeping it |
 | --- | --- | --- |
-| 1 | | |
+| 1 | Fixed | 2651b4b (Remove unused Date import) |
+| 2 | Fixed | 2651b4b (Remove unused Date import) |
+| 3 | Fixed | 490ffee (Remove unused maxParcels field) |
+| 4 | Kept | ParcelPoint is a command-line program, and the SMS text printed to the console is its intended output. |
+| 5 | Fixed | 05131dd (Fix string comparison in pickUp) |
+| 6 | Kept | The staff listing is printed to the console for the user, which is the intended output of the program. |
+| 7 | Kept | The waiting listing is printed to the console for the user, which is the intended output of the program. |
+| 8 | Fixed | bc440e9 (Close FileWriter with try-with-resources) |
+| 9 | Fixed | b3d5930 (Report file write errors instead of ignoring them) |
+| 10 | Kept | ParcelPoint is a command-line program, and the list of commands printed to the console is part of its interface. |
+| 11 | Kept | The result of the store command is printed to the console as the output of the program. |
+| 12 | Kept | The fee of the pickup command is printed to the console as the output of the program. |
+| 13 | Kept | The free-locker count of the staff command is printed to the console as the output of the program. |
 
-Number of SonarQube issues that remain after your fixes:
+Number of SonarQube issues that remain after your fixes: 7
 
 The two design problems that you fixed
 
 | Design problem (course term) | What you changed | Commit |
 | --- | --- | --- |
-| | | |
-| | | |
+| Connascence of Convention | Created a `ParcelSize` enum (SMALL, MEDIUM, LARGE) that holds the number mapping, and used it in `Parcel`, `Locker`, `ParcelService` and `Main`. | 8eb3f9a |
+| Logical Cohesion and Control Coupling | Replaced it with `printStaffList()` and `printWaitingList()`, so `Main` no longer passes a flag. | 1ce44da |
 
 Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv:
 
 ```text
+Commands: store <code> <studentId> <size 1-3>, pickup <code> <days>, list, staff, quit
+store P1 6501 2
+SMS to 6501: parcel P1 is in locker 2
+Locker 2
+pickup P1 5
+Fee: 30.0
+staff
+P1 6501 PICKED_UP
+Free lockers: 3
+quit
+```
+Content of `parcels.csv`:
 
+```csv
+P1,PICKED_UP
 ```
 
 ## Task 4. AI-generated poor and good designs
