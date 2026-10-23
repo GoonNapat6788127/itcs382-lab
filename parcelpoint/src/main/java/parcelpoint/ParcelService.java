@@ -64,15 +64,19 @@ public class ParcelService {
         };
     }
 
-    public void printParcels(boolean forStaff) {
-        for (Parcel parcel : parcels) {
-            if (forStaff) {
-                System.out.println(parcel.getCode() + " " + parcel.getStudentId() + " " + parcel.status);
-            } else if (parcel.status.equals("STORED")) {
-                System.out.println(parcel.getCode() + " is waiting");
-            }
+    public void printStaffList() {
+    for (Parcel parcel : parcels) {
+        System.out.println(parcel.getCode() + " " + parcel.getStudentId() + " " + parcel.status);
+    }
+}
+
+public void printWaitingList() {
+    for (Parcel parcel : parcels) {
+        if (parcel.status.equals("STORED")) {
+            System.out.println(parcel.getCode() + " is waiting");
         }
     }
+}
 
     private void saveToFile() {
         try (FileWriter writer = new FileWriter("parcels.csv")){
