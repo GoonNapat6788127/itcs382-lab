@@ -177,13 +177,21 @@ P1,PICKED_UP
 ## Task 5. Reflection
 
 5.1 What does SonarQube check, and what does it not check? Answer with examples from this lab.
+- SonarQube checks code-level problems that match its rules. In this lab it found the string comparison with `==` (java:S4973), the `FileWriter` that was never closed (java:S2095), the empty `catch` block (java:S108), the unused import and field, and the `System.out` calls. It does not judge design in the terms of this course. 
+- It did not report the public `status` field, the numbers 1, 2 and 3 for parcel size that several classes must read the same way, the `printParcels(boolean forStaff)` flag, or the fact that `ParcelService` does many different jobs.
 
 5.2 When should you not trust the AI review? Give an example from this lab.
+- I should not trust the AI review when a finding cannot be confirmed in the code, or when its numbers hide the real difference. In Task 2, finding 10 said `main()` was too long, but it has only 22 lines, and finding 15 grouped six fields into one vague problem.
+- In Task 4, bikeshare-good got 17 Check 2 findings against 10 for bikeshare-poor, although most were only Note, so the count alone would suggest that the good design is worse.
 
 5.3 What will you do differently in Project Phase 2 after this lab?
+- I will run SonarQube while I write the code, not only at the end, and I will avoid boolean flags, public fields and int codes from the start by using separate methods, private fields and enums.
+- I will use the AI review as a second check, and I will open the file at every line it gives and compare the severity of the findings, not only the count, before I change anything.
 
 ## AI usage declaration
 
 | AI tool and exact model | Purpose | Files or parts that it produced or changed | How you checked its output |
 | --- | --- | --- | --- |
-| | | | |
+| ChatGPT GPT-6 | Revised grammar and checked spelling. | Wording and grammar throughout the lab report. | I reviewed the suggested changes and checked that the original meaning was preserved. |
+| ChatGPT GPT-6 | Improved the Markdown formatting to make the report more readable and properly organized. | Markdown formatting, tables, and overall readability of LAB_REPORT.md. | I checked the formatting, table structure, and readability in the Markdown file. |
+| ChatGPT GPT-6 | Checked my ideas and explanations in Task 3 (Fix and check). | Task 3 explanations about the SonarQube fixes, design problems, and reasons for keeping some issues. | I compared the suggestions with my actual code changes, commit history, and lab results. |
