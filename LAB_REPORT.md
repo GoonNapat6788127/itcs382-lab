@@ -10,7 +10,7 @@ Repository URL: https://github.com/GoonNapat6788127/itcs382-lab.git
 | Maven | Apache Maven 3.10.0 |
 | IDE | Visual Studio Code 1.142.0 |
 | SonarQube for IDE | 6.1.1 |
-| AI tool and exact model | ChatGPT GPT-6|
+| AI tool and exact model | ChatGPT GPT-6 |
 
 ## Task 1. SonarQube on the starter code
 
@@ -149,22 +149,30 @@ P1,PICKED_UP
 
 | Item | bikeshare-poor | bikeshare-good |
 | --- | --- | --- |
-| Date | | |
-| AI tool and exact model | | |
-| Prompt (B or C as given, or your changed prompt in full) | | |
-| Builds with mvn package (yes or no) | | |
-| Number of classes, interfaces, enums and records | | |
-| SonarQube issues, total | | |
-| SonarQube issues, by rule | | |
-| AI review findings in Check 1 | | |
-| AI review findings in Check 2 | | |
-| Review output file in the reviews folder | | |
+| Date | 23 October 2026 | 23 October 2026 |
+| AI tool and exact model | ChatGPT GPT-6 | ChatGPT GPT-6 |
+| Prompt (B or C as given, or your changed prompt in full) | Prompt B as given | Prompt C as given |
+| Builds with mvn package (yes or no) | yes | yes |
+| Number of classes, interfaces, enums and records | 1 (Classes ×1) | 10 (Classes ×7, Interfaces ×1,<br>Enums ×1, Records ×1) |
+| SonarQube issues, total | 33 | 22 |
+| SonarQube issues, by rule | java:S106 ×26, java:S2386 ×5, <br>java:S3776 ×1, java:S1659 ×1 | java:S106 ×22 |
+| AI review findings in Check 1 | 18 | 10 |
+| AI review findings in Check 2 | 10 | 17 |
+| Review output file in the reviews folder | reviews/bikeshare-poor-review.md | reviews/bikeshare-good-review.md |
 
 4.1 Did SonarQube report any cohesion or coupling problem in bikeshare-poor? Quote the rule and the message if it did.
+- Yes, but not directly.
+- `java:S3776`: "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed. [+18 locations]" at `BikeShare.java` line 35, where one method does both renting and returning (weak cohesion).
+- `java:S2386`: "Make this member "protected"." at lines 10 to 14, for public static fields shared by the whole class (common coupling).Make this member "protected".
 
 4.2 Did the AI review tell the two versions apart? Give one finding for bikeshare-poor that does not appear for bikeshare-good.
+- Yes, but by severity, not by number. The totals are almost the same (28 and 27), so the count alone shows no clear difference. The severity does: all 10 Check 2 findings in bikeshare-poor are Should fix, while 13 of the 17 in bikeshare-good are only Note.
+- One finding for bikeshare-poor that does not appear for bikeshare-good is finding 22, control coupling at `BikeShare.java:24-27, 35-36`: `process(false)` or `process(true)` passes a flag that chooses which workflow runs.
 
 4.3 Which version would you rather extend with a new member type, such as a visitor who pays 4 baht per minute, and why?
+- I would extend bikeshare-good. A visitor needs only a new `VISITOR` constant with the rate 4 in the `MemberType` enum, because the service calculates the fee from the type's rate (`BikeShareService.java:78`).
+- In bikeshare-poor the types are int codes (`BikeShare.java:15`) used in several places of `process`, and a missed place gives a wrong fee without an error (finding 26).
+- In real work and when editing code, I think bikeshare-good is more convenient and better organized.
 
 ## Task 5. Reflection
 
